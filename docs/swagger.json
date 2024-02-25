@@ -1,0 +1,193 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A Product management API for SAL Merchants.",
+        "title": "SAL Merchant Product API",
+        "contact": {
+            "name": "SAL",
+            "url": "zraelwalker@gmail.com",
+            "email": "zraelwalker@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8081",
+    "basePath": "/api/v1",
+    "paths": {
+        "/products/{merchantId}": {
+            "get": {
+                "description": "List Merchant Products.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "Get Merchant products",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "merchant id",
+                        "name": "merchantId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/main.Product"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create Merchant Product.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "Create product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "merchant id",
+                        "name": "merchantId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "The product to create",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/main.Product"
+                        }
+                    }
+                }
+            }
+        },
+        "/products/{merchantId}/{skuId}": {
+            "put": {
+                "description": "Update Merchant Product.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "Update product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "merchant id",
+                        "name": "merchantId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "product sku",
+                        "name": "skuId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "The product to update",
+                        "name": "product",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Product"
+                        }
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "schema": {
+                            "$ref": "#/definitions/main.Product"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete Merchant Product.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "products"
+                ],
+                "summary": "Delete product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "merchant id",
+                        "name": "merchantId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "product sku",
+                        "name": "skuId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Product": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "skuId": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

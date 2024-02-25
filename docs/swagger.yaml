@@ -1,0 +1,129 @@
+basePath: /api/v1
+definitions:
+  main.Product:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      skuId:
+        type: string
+    type: object
+host: localhost:8081
+info:
+  contact:
+    email: zraelwalker@gmail.com
+    name: SAL
+    url: zraelwalker@gmail.com
+  description: A Product management API for SAL Merchants.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: SAL Merchant Product API
+  version: "1.0"
+paths:
+  /products/{merchantId}:
+    get:
+      description: List Merchant Products.
+      parameters:
+      - description: merchant id
+        in: path
+        name: merchantId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/main.Product'
+            type: object
+      summary: Get Merchant products
+      tags:
+      - products
+    post:
+      consumes:
+      - application/json
+      description: Create Merchant Product.
+      parameters:
+      - description: merchant id
+        in: path
+        name: merchantId
+        required: true
+        type: string
+      - description: The product to create
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/main.Product'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/main.Product'
+      summary: Create product
+      tags:
+      - products
+  /products/{merchantId}/{skuId}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Merchant Product.
+      parameters:
+      - description: merchant id
+        in: path
+        name: merchantId
+        required: true
+        type: string
+      - description: product sku
+        in: path
+        name: skuId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete product
+      tags:
+      - products
+    put:
+      consumes:
+      - application/json
+      description: Update Merchant Product.
+      parameters:
+      - description: merchant id
+        in: path
+        name: merchantId
+        required: true
+        type: string
+      - description: product sku
+        in: path
+        name: skuId
+        required: true
+        type: string
+      - description: The product to update
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/main.Product'
+      produces:
+      - application/json
+      responses:
+        "202":
+          description: Accepted
+          schema:
+            $ref: '#/definitions/main.Product'
+      summary: Update product
+      tags:
+      - products
+swagger: "2.0"
