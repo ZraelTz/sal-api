@@ -29,3 +29,10 @@ The following diagram shows the ERD of the Merchant and Product database
 | email           |     | price           |
 +-----------------+     | created_at      |
                         +-----------------+
+
+````
+## How to start the server
+Execute the following command in the project root directory to start the server locally on port 8081
+````
+go run .
+````
